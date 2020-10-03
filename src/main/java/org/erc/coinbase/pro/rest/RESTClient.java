@@ -16,10 +16,9 @@
  */
 package org.erc.coinbase.pro.rest;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.erc.coinbase.pro.Client;
 import org.erc.coinbase.pro.exceptions.CoinbaseException;
@@ -28,6 +27,7 @@ import org.erc.coinbase.pro.exceptions.SignatureException;
 import org.erc.coinbase.pro.model.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import org.erc.coinbase.pro.model.Currency;
 
 
 /**
@@ -298,17 +298,19 @@ public class RESTClient implements Client {
 	 * @see org.erc.coinbase.pro.rest.Client#getProductHistoricRate(org.erc.coinbase.pro.model.ProductCandleFilter)
 	 */
     @Override
-	public List<String[]> getProductHistoricRate(ProductCandleFilter request) throws CoinbaseException{
+	public List<Candle> getProductHistoricRate(ProductCandleFilter request) throws CoinbaseException{
     	assertRequired("filter",request);
     	assertRequired("productId",request.getProductId());
     	Map<String,Object> filter = new HashMap<>();
-		putIfAbsent(filter, "start", request.getStart());
-		putIfAbsent(filter, "end", request.getEnd());
+		putIfAbsent(filter, "start", request.getStart().format(DateTimeFormatter.ISO_INSTANT));
+		putIfAbsent(filter, "end", request.getEnd().format(DateTimeFormatter.ISO_INSTANT));
 		if(request.getGranularity()!=null) {
 			putIfAbsent(filter, "granularity", request.getGranularity().getSeconds());
 		}
-    	return http.get(String.format("/products/%s/trades",request.getProductId()), new TypeReference<List<String[]>>() {},filter, false);
-    }    
+		List<String[]> result = http.get(String.format("/products/%s/candles", request.getProductId()), new TypeReference<List<String[]>>() {
+		}, filter, false);
+		return result.stream().map(Candle::new).collect(Collectors.toList());
+	}
     
     /* (non-Javadoc)
 	 * @see org.erc.coinbase.pro.rest.Client#getProductStats(java.lang.String)

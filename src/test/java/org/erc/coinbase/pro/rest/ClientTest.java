@@ -45,20 +45,20 @@ public class ClientTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void currenciesTest() throws CoinbaseException {
 		List<Currency> currency = client.getCurrencies();
 		assertNotNull(currency);
 	}
 	
-	@Test
+	//@Test
 	public void timeTest() throws CoinbaseException {
 		Date value = client.getTime();
 		assertNotNull(value);
 	}
 	
 	
-	@Test
+	//@Test
 	public void getAccounts1() throws CoinbaseException {
 		List<Account> account = client.getAccounts(null);
 		assertNotNull(account);
@@ -68,7 +68,7 @@ public class ClientTest {
 		assertNotNull(account2);
 	}
 	
-	@Test
+	//@Test
 	public void getAccounts2() throws CoinbaseException {
 		AccountFilter filter = new AccountFilter();
 		filter.setLimit(2);
@@ -82,14 +82,14 @@ public class ClientTest {
 		assertNotNull(account2);
 	}
 	
-	@Test
+	//@Test
 	public void getCoinbaseAccounts() throws CoinbaseException {
 		List<CoinbaseAccount> items = client.getCoinbaseAccounts();
 		assertNotNull(items);
 		
 	}
 	
-	@Test
+	//@Test
 	public void getFills() throws CoinbaseException {
 		FillFilter filter = new FillFilter();
 		filter.setProductId("BTC-USD");
@@ -97,19 +97,19 @@ public class ClientTest {
 		assertNotNull(items);
 	}	
 	
-	@Test
+	//@Test
 	public void getProducts() throws CoinbaseException {
 		List<Product> items = client.getProducts(null);
 		assertNotNull(items);
 	}
 	
-	@Test
+	//@Test
 	public void getTrailingVolume() throws CoinbaseException {
 		List<TrailingVolume> items = client.getTrailingVolume();
 		assertNotNull(items);
 	}	
 	
-	@Test
+	//@Test
 	public void getPaymentMethods() throws CoinbaseException {
 		List<Payment> items = client.getPaymentMethods();
 		assertNotNull(items);

@@ -20,37 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.erc.coinbase.pro.exceptions.CoinbaseException;
-import org.erc.coinbase.pro.model.Account;
-import org.erc.coinbase.pro.model.AccountFilter;
-import org.erc.coinbase.pro.model.AccountHistory;
-import org.erc.coinbase.pro.model.AccountHistoryFilter;
-import org.erc.coinbase.pro.model.AccountHoldFilter;
-import org.erc.coinbase.pro.model.Book;
-import org.erc.coinbase.pro.model.CoinbaseAccount;
-import org.erc.coinbase.pro.model.Conversion;
-import org.erc.coinbase.pro.model.ConversionRequest;
-import org.erc.coinbase.pro.model.Currency;
-import org.erc.coinbase.pro.model.Deposit;
-import org.erc.coinbase.pro.model.DepositRequest;
-import org.erc.coinbase.pro.model.Fill;
-import org.erc.coinbase.pro.model.FillFilter;
-import org.erc.coinbase.pro.model.Hold;
-import org.erc.coinbase.pro.model.Order;
-import org.erc.coinbase.pro.model.OrderFilter;
-import org.erc.coinbase.pro.model.OrderRequest;
-import org.erc.coinbase.pro.model.Payment;
-import org.erc.coinbase.pro.model.Product;
-import org.erc.coinbase.pro.model.ProductCandleFilter;
-import org.erc.coinbase.pro.model.ProductTradesFilter;
-import org.erc.coinbase.pro.model.ProductsFilter;
-import org.erc.coinbase.pro.model.Report;
-import org.erc.coinbase.pro.model.ReportRequest;
-import org.erc.coinbase.pro.model.Stats;
-import org.erc.coinbase.pro.model.Ticker;
-import org.erc.coinbase.pro.model.Trade;
-import org.erc.coinbase.pro.model.TrailingVolume;
-import org.erc.coinbase.pro.model.Withdrawal;
-import org.erc.coinbase.pro.model.WithdrawalRequest;
+import org.erc.coinbase.pro.model.*;
 
 public interface Client {
 
@@ -847,7 +817,7 @@ public interface Client {
 	 * @return the product candles
 	 * @throws CoinbaseException the coinbase exception
 	 */
-	List<String[]> getProductHistoricRate(ProductCandleFilter request) throws CoinbaseException;
+	List<Candle> getProductHistoricRate(ProductCandleFilter request) throws CoinbaseException;
 
 	/**
 	 * Get 24 hr stats for the product. volume is in base currency units. open, high, low are in quote currency units.

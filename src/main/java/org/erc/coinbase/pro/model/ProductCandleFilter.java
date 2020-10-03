@@ -16,6 +16,7 @@
  */
 package org.erc.coinbase.pro.model;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import lombok.Data;
@@ -29,10 +30,10 @@ public class ProductCandleFilter {
 	private String productId;
 	
 	/** The start. */
-	private Date start;
+	private ZonedDateTime start;
 	
 	/** The end. */
-	private Date end;
+	private ZonedDateTime end;
 	
 	/** The granularity. */
 	private Granularity granularity;
